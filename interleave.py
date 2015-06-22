@@ -44,6 +44,14 @@ def part1by2(n):
     return n
 
 
+def part1by3(n):
+    s = bin(n)[2:]
+    p = ''
+    for e in s:
+        p += e + '000'
+    return int('0b' + p[:-2:], base=2)
+
+
 def interleave2(x, y):
     max_bits = max(x.bit_length(), y.bit_length())
     iterations = int(ceil(max_bits / 16))
@@ -63,14 +71,7 @@ def interleave3(x, y, z):
 
 
 def interleave4(w, x, y, z):
-    nums = [w, x, y, z]
-    bit_lengths = [num.bit_length() for num in nums]
-    max_bits = max(bit_lengths)
-    bin_strs = [pad_bin(num, max_bits) for num in nums]
-    s = ''
-    for i in range(max_bits):
-        for e in bin_strs:
-            s += e[i]
-    return int('0b' + s, base=2)
-
-
+    return (part1by3(w) |
+            (part1by3(x) << 1) |
+            (part1by3(y) << 2) |
+            (part1by3(z) << 3))
