@@ -1,2 +1,5 @@
 *.pyc
 .DS_Store
+interleave_numerics.c
+*.so
+build/
